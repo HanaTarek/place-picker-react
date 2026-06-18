@@ -38,7 +38,7 @@ app.get('/user-places', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });atus(200).json({ places });
-});
+
 
 app.put('/user-places', async (req, res) => {
   const places = req.body.places;
