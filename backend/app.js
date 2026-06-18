@@ -1,21 +1,13 @@
 import fs from 'node:fs/promises';
-
 import bodyParser from 'body-parser';
 import express from 'express';
- //we need backend to handle that only right requests get handeled by thee backend 
- // so no one surgeon the database
-
 import cors from 'cors';
 
 const app = express();
+
 app.use(cors({ origin: 'https://place-picker-react-beta.vercel.app' }));
-
-
 app.use(express.static('images'));
 app.use(bodyParser.json());
-
-// CORS
-
 
 app.get('/places', async (req, res) => {
   try {
@@ -37,18 +29,14 @@ app.get('/user-places', async (req, res) => {
     console.error('Error reading user-places.json:', err);
     res.status(500).json({ message: err.message });
   }
-});res.status(200).json({ places });
-
+});
 
 app.put('/user-places', async (req, res) => {
   const places = req.body.places;
-
   await fs.writeFile('./data/user-places.json', JSON.stringify(places));
-
   res.status(200).json({ message: 'User places updated!' });
 });
 
-// 404
 app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
     return next();
