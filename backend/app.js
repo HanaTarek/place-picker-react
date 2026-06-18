@@ -4,7 +4,11 @@ import bodyParser from 'body-parser';
 import express from 'express';
  //we need backend to handle that only right requests get handeled by thee backend 
  // so no one surgeon the database
+
+import cors from 'cors';
+
 const app = express();
+app.use(cors());
 
 app.use(express.static('images'));
 app.use(bodyParser.json());
@@ -52,4 +56,5 @@ app.use((req, res, next) => {
   res.status(404).json({ message: '404 - Not Found' });
 });
 
-app.listen(5000);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));

@@ -1,6 +1,6 @@
 export async function fetchAvaiablePlaces() {
     
-    const response = await fetch('http://127.0.0.1:3000/places');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/places`);
         const resData = await response.json();
     
         if(!response.ok){
@@ -11,8 +11,8 @@ export async function fetchAvaiablePlaces() {
 }
 
 export async function fetchUserPlaces() {
-    
-    const response = await fetch('http://127.0.0.1:3000/user-places');
+
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/user-places`);
         const resData = await response.json();
     
         if(!response.ok){
@@ -29,7 +29,7 @@ export async function updateUserPlaces(places) {
     // fetch() sends an HTTP request to the backend API
     // here we send a PUT request to update the user's places
     // PUT is commonly used to update existing data on the server
-    const response = await fetch('http://127.0.0.1:3000/user-places', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/user-places`, {
 
         // configure the type of request
         method: 'PUT',
