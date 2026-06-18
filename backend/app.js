@@ -37,7 +37,7 @@ app.get('/user-places', async (req, res) => {
     console.error('Error reading user-places.json:', err);
     res.status(500).json({ message: err.message });
   }
-});atus(200).json({ places });
+});res.status(200).json({ places });
 
 
 app.put('/user-places', async (req, res) => {
