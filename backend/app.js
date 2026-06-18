@@ -18,20 +18,26 @@ app.use(bodyParser.json());
 
 
 app.get('/places', async (req, res) => {
-  const fileContent = await fs.readFile('./data/places.json');
-
-  const placesData = JSON.parse(fileContent);
-
-  res.status(200).json({ places: placesData });
-  console.log("placesData")
+  try {
+    const fileContent = await fs.readFile('./data/places.json');
+    const placesData = JSON.parse(fileContent);
+    res.status(200).json({ places: placesData });
+  } catch (err) {
+    console.error('Error reading places.json:', err);
+    res.status(500).json({ message: err.message });
+  }
 });
 
 app.get('/user-places', async (req, res) => {
-  const fileContent = await fs.readFile('./data/user-places.json');
-
-  const places = JSON.parse(fileContent);
-
-  res.status(200).json({ places });
+  try {
+    const fileContent = await fs.readFile('./data/user-places.json');
+    const places = JSON.parse(fileContent);
+    res.status(200).json({ places });
+  } catch (err) {
+    console.error('Error reading user-places.json:', err);
+    res.status(500).json({ message: err.message });
+  }
+});atus(200).json({ places });
 });
 
 app.put('/user-places', async (req, res) => {
