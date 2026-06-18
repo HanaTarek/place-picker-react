@@ -8,7 +8,7 @@ import express from 'express';
 import cors from 'cors';
 
 const app = express();
-app.use(cors({ origin: 'https://place-picker-react-beta.vercel.app/' }));
+app.use(cors({ origin: 'https://place-picker-react-beta.vercel.app' }));
 
 
 app.use(express.static('images'));
@@ -16,13 +16,6 @@ app.use(bodyParser.json());
 
 // CORS
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // allow all domains
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  next();
-});
 
 app.get('/places', async (req, res) => {
   const fileContent = await fs.readFile('./data/places.json');
